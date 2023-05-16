@@ -31,4 +31,9 @@ class Database
     {
         return $this->mysqli->query($query);
     }
+
+    protected function getInsertId() : int|string
+    {
+        return mysqli_insert_id($this->mysqli);
+    }
 }

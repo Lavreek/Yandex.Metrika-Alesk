@@ -16,6 +16,8 @@ class Aleskrow
 
     private string $create_date_time;
 
+    private array $response;
+
     private function checkVariable($variable) : string
     {
         if (empty($variable)) {
@@ -28,8 +30,10 @@ class Aleskrow
     public function __construct($response)
     {
         foreach ($response as $key => $value) {
-            $this->$key = $value;
+            $this->$key = $value ?: "";
         }
+
+        $this->response = $response;
     }
 
     /**
@@ -63,6 +67,11 @@ class Aleskrow
      */
     public function getCreateDateTime() : string
     {
-        return $this->checkVariable($this->create_date_time);
+        return $this->checkVariable(date("d.m.Y H:i", strtotime($this->create_date_time)));
+    }
+
+    public function getResponse() : array
+    {
+        return $this->response;
     }
 }

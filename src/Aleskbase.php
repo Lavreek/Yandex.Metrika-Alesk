@@ -10,11 +10,15 @@ final class Aleskbase extends Database
     }
 
 
-    public function getRows($limit = 250, $offset = 0)
+    public function getRows(int $limit = 1, int $offset = 0, bool $single = false)
     {
-        $query = "SELECT * FROM `in_progress` LIMIT $limit OFFSET $offset";
+        $query = "SELECT * FROM `in_progress` ORDER BY `id` ASC LIMIT $limit OFFSET $offset";
         $request = $this->getRequest($query);
 
-        return $this->getResponse($request);
+        if ($limit === 1) {
+            $single = true;
+        }
+
+        return $this->getResponse($request, $single);
     }
 }

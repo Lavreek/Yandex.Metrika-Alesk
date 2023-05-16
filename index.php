@@ -17,8 +17,10 @@ $dotenv->load(__DIR__ . '/.env');
 $root = new Rootbase($_ENV['HOST'], $_ENV['USER'], $_ENV['PASSWORD'], $_ENV['DATABASE']);
 $alesk = new Aleskbase($_ENV['ALESK_HOST'], $_ENV['ALESK_USER'], $_ENV['ALESK_PASSWORD'], $_ENV['ALESK_DATABASE']);
 
-foreach ($alesk->getRows(limit: 1) as $aleskResponse) {
+$limit = 1;
+$offset = 0;
+
+while ($aleskResponse = $alesk->getRows(limit: $limit, offset: $offset)) {
     $root->checkAleskRow(new Aleskrow($aleskResponse));
+    $offset += $limit;
 }
-
-
