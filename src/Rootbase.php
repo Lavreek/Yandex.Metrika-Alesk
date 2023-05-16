@@ -21,7 +21,7 @@ final class Rootbase extends Database
 
             if ($response) {
                 if ($response['order_status'] !== $aleskRow->getOrderStatus()) {
-                    $fileCommander->setFilename("need-save" . date("Y-m-d") . ".csv");
+                    $fileCommander->setFilename("save.csv");
 
                     $response['order_status'] = $aleskRow->getOrderStatus();
                     $this->updateAleskRowsStatus($response['id'], $response['order_status']);
@@ -29,7 +29,7 @@ final class Rootbase extends Database
                     $fileCommander->pushData($response);
                 }
             } else {
-                $fileCommander->setFilename(date("Y-m-d") . ".csv");
+                $fileCommander->setFilename("append.csv");
 
                 $id = $this->insertAleskRows($aleskRow);
 
