@@ -21,7 +21,6 @@ class FileCommander
     public function setFilename(string $name) : void
     {
         $this->filename = $name;
-
         $this->makeFile();
     }
 
@@ -48,7 +47,7 @@ class FileCommander
         file_put_contents(self::default_dirs['default'] . "/" . $this->filename, implode(",", $data) . "\n", FILE_APPEND);
     }
 
-    public function emptyDefaultDirectory()
+    public function emptyDefaultDirectory() : void
     {
         $files = array_diff(scandir(self::default_dirs['default']), ['..', '.']);
 

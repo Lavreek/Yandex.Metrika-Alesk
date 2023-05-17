@@ -14,7 +14,7 @@ class Database
         $this->mysqli = new mysqli($host, $user, $password, $database);
     }
 
-    protected function getResponse($request, bool $single = false)
+    protected function getResponse($request, bool $single = false) : array|null
     {
         if (mysqli_num_rows($request) > 0) {
             if ($single) {
